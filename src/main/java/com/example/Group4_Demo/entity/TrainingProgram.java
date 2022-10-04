@@ -6,11 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -20,13 +18,15 @@ import java.util.Date;
 public class TrainingProgram {
     @Id
     private long trainingProgramId;
-    private String name;
-    @ManyToOne
-    @JoinColumn(name = "syllabusId", nullable = false)
-    private Syllabus syllabus;
-    private Date createdDate;
     private int userId;
+    private String name;
+    private Date createdDate;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "training_program_syllabus_map",
+            joinColumns = @JoinColumn(name = "trainingProgram_id", referencedColumnName = "trainingProgramId"),
+            inverseJoinColumns =  @JoinColumn(name = "syllabus_id", referencedColumnName = "syllabusID"))
+    private List<Syllabus> syllabusList;
 
 
 }
