@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
@@ -21,11 +19,10 @@ public class TrainingProgram {
     @Id
     private long trainingProgramId;
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "syllabusId", nullable = false)
-    private Syllabus syllabus;
+    private int syllabusID;
     private Date createdDate;
     private int userId;
+    private int status;
 
 
 
