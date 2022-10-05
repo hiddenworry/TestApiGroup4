@@ -21,6 +21,6 @@ public class Syllabus {
     private int syllabusDuration;
     private String syllabusVersion;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "syllabusList")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "syllabusList", fetch = FetchType.LAZY)
     private List<TrainingProgram> trainingProgramList;
 }

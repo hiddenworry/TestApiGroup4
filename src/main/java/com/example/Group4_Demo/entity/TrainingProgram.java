@@ -22,11 +22,9 @@ public class TrainingProgram {
     private String name;
     private Date createdDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "training_program_syllabus_map",
             joinColumns = @JoinColumn(name = "trainingProgram_id", referencedColumnName = "trainingProgramId"),
             inverseJoinColumns =  @JoinColumn(name = "syllabus_id", referencedColumnName = "syllabusID"))
     private List<Syllabus> syllabusList;
-
-
 }
