@@ -1,6 +1,5 @@
 package com.example.Group4_Demo.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,9 +21,6 @@ public class Syllabus {
     private int syllabusDuration;
     private String syllabusVersion;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "trainingProgram_map",
-            joinColumns = @JoinColumn(name = "syllabusID", referencedColumnName = "syllabusID"),
-            inverseJoinColumns =  @JoinColumn(name = "trainingProgramId", referencedColumnName = "trainingProgramId"))
-    List<TrainingProgram> trainingProgramList;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "syllabusList", fetch = FetchType.LAZY)
+    private List<TrainingProgram> trainingProgramList;
 }
