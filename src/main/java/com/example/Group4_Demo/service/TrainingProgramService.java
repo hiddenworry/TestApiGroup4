@@ -12,4 +12,6 @@ public interface TrainingProgramService {
 
     public TrainingProgram findByUserIdAndStatus(int userId, int status);
 
+    public TrainingProgram insertTrainingProgram(TrainingProgram trainingProgram);
+
 }

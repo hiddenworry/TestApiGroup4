@@ -31,4 +31,9 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
     public TrainingProgram findByUserIdAndStatus(int userId, int status) {
         return trainingProgramRepository.findByUserIdAndStatus(userId, status).orElse(null);
     }
+
+    @Override
+    public TrainingProgram insertTrainingProgram(TrainingProgram trainingProgram) {
+        return trainingProgramRepository.save(trainingProgram);
+    }
 }

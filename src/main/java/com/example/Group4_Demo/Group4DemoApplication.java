@@ -2,11 +2,11 @@ package com.example.Group4_Demo;
 
 import com.example.Group4_Demo.entity.Syllabus;
 import com.example.Group4_Demo.entity.TrainingProgram;
+import com.example.Group4_Demo.repository.SyllabusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.example.Group4_Demo.repository.SyllabusRepository;
 
 import java.util.Calendar;
 import java.util.List;
@@ -28,16 +28,18 @@ public class Group4DemoApplication implements CommandLineRunner {
 																	 .createdDate(Calendar.getInstance().getTime())
 														   .build();
 		TrainingProgram trainingProgram_2 = TrainingProgram.builder().trainingProgramId(2L)
-																	 .userId(2)
-																	 .name("Ops")
-																	 .createdDate(Calendar.getInstance().getTime())
+				.userId(2)
+				.name("Ops")
+				.createdDate(Calendar.getInstance().getTime())
+				.status(1)
 														   .build();
 		Syllabus syllabus_1 = Syllabus.builder().syllabusID(1L)
 												.syllabusName("Docker")
 												.syllabusStatus(false)
 												.syllabusDuration(5)
 												.syllabusVersion("v.1")
-												.trainingProgramList(List.of(trainingProgram_1, trainingProgram_2))
+
+				.trainingProgramList(List.of(trainingProgram_1, trainingProgram_2))
 												.build();
 		Syllabus syllabus_2 = Syllabus.builder().syllabusID(2L)
 												.syllabusName("Kubernetes")

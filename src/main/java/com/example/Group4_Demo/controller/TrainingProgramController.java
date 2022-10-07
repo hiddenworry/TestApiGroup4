@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 public class TrainingProgramController {
     private static final int SAVE_DRAW_STATUS = 0;
@@ -27,22 +25,25 @@ public class TrainingProgramController {
             } else
                 return ResponseEntity.ok().body(name);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 
-   @PostMapping("/api/training-program/create")
-        public ResponseEntity<?> checkIfUserHaveSaveDraw(@RequestBody int userId){
-            try {
-                TrainingProgram trainingProgram = trainingProgramService.findByUserIdAndStatus(userId, SAVE_DRAW_STATUS);
-                if(trainingProgram != null){
-                    return ResponseEntity.ok().body(trainingProgram);
-                } else
-                    return ResponseEntity.notFound().build();
+    @PostMapping("/api/training-program/create/save")
+    public ResponseEntity<?> checkIfUserHaveSaveDraw(@RequestBody TrainingProgram trainingProgram) {
+        try {
 
-            } catch (Exception ex){
+            TrainingProgram draw = trainingProgramService.findByUserIdAndStatus(trainingProgram.getUserId(), SAVED_STATUS);
+
+            if (draw == null) {
+                trainingProgramService.insertTrainingProgram(trainingProgram);
+                return ResponseEntity.ok().body(trainingProgram);
+            } else
+                return ResponseEntity.notFound().build();
+
+        } catch (Exception ex){
                     ex.printStackTrace();
                     return ResponseEntity.internalServerError().build();
             }
